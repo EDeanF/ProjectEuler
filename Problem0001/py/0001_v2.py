@@ -24,6 +24,6 @@ def SumDivisibleBy(n) :
     # sums all multiples of n less than UpperBound
     global UpperBound
     p = (UpperBound-1)/n
-    return n*(p*(p+1))/2
+    return n*p*(p+1)/2
 
 print "The answer is", SumDivisibleBy(factor1)+SumDivisibleBy(factor2)-SumDivisibleBy(factor1*factor2)

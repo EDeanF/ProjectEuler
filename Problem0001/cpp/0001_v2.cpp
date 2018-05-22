@@ -12,7 +12,7 @@ int UpperBound;
 int SumDivisibleBy( int n)
 {
 	int p = (UpperBound-1)/n;
-	return n*(p*(p+1))/2;
+	return n*p*(p+1)/2;
 }
 
 int main()
