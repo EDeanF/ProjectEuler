@@ -12,10 +12,7 @@ Brute force method: scan through list, saving the largest product, and the digit
 
 We can do two operations per iteration i.e. divide by first number of last product
     and multiply by last number of current product
-
-Problem: how to handle zeros
-
-
+This method requires an exception for zeros though, which isn't very elegant, but does speed up the algorithm
 
 """
 
@@ -26,17 +23,35 @@ string="731671765313306249192251196744265747423553491949349698352031277450632623
 
 size = len(string)
 
-MaxProduct = 1
+def MakeProduct(string):
+    size = len(string)
+    product=1
+    for i in range(size):
+        product*=int(string[i])
+    return product
 
 i=0
 j=N
+
+# initialize product
+product = MakeProduct(string[i:j])
+MaxProduct = product
+
 while j < size:
-    product=1
-    for k in range(i,j):
-        product *= int(string[k])
-    if product > MaxProduct:
-        MaxProduct = product
+    # compute next product
+    product = product/int(string[i])*int(string[j])
+    # update indices
     i+=1
     j+=1
+    # jump forward if product is 0
+    while product == 0: 
+        i=j
+        j=i+N
+        if j >= size:
+            break
+        product = MakeProduct(string[i:j])
+    # update MaxProduct, if necessary
+    if product > MaxProduct:
+        MaxProduct = product
 
 print "The answer is", MaxProduct
